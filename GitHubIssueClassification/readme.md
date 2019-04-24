@@ -1,0 +1,55 @@
+### Title
+Tutorial: Use ML.NET in a multiclass classification scenario to classify GitHub issues
+
+## URL
+https://docs.microsoft.com/en-us/dotnet/machine-learning/tutorials/github-issue-classification
+
+##### IDE
+Visual Studio Code
+
+##### Training Data
+
+##### Test Data
+
+##### Things to learn
+1. Understand the problem
+1. Select the appropriate machine learning algorithm
+1. Prepare your data
+1. Transform the data
+1. Train the model
+1. Evaluate the model
+1. Predict with the trained model
+1. Deploy and Predict with a loaded model
+
+##### Versions
+This tutorial and related sample are currently using ML.NET version 0.11, however I am using 1.0.0-preview
+
+##### Workflow phases
+1. Understand the problem
+1. Prepare you data
+    - Load the data
+    - Extract features (Transform you data)
+1. Build and train
+    - Train the model
+    - Evaluate the model
+1. Deploy Model
+    - User the Model to predict
+
+##### Understand the problem
+The problem can be broken into the following parts:
+- the issue title text
+- the issue description text
+- an area value for the model training data
+- a predicted area value that you can evaluate and then
+
+##### Select the appropriate mahine learning algorithm
+Given that GitHub issues can be labeled in several areas (Area), we want to predict the Area of a new GitHub issue. This makes the classification learning algorithm is best suited for this scenario. A classification leaning algorithm that users data to determine the category, type or class of an item or row of data. Classification learning algorithms are generally used in either a binary or multiclass fashion. For this problem, we are going to use a Multiclass classification learning algorithm, since the issue category prediction can be one of many categories.
+
+##### Create console app
+dotnet new console -n GitHubIssueClassification
+New-Item -Type Directory Data
+New-Item -Type Directory Models
+dotnet add package Microsoft.ML --version 1.0.0-preview
+
+##### Prepare my data
+Download the issues_train.tsv(https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_train.tsv) and the issues_test.tsv(https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_test.tsv) data sets and save them to the Data folder previously created. The first dataset trains the machine learning model and the second can be used to evaluate how accurate your model is.
