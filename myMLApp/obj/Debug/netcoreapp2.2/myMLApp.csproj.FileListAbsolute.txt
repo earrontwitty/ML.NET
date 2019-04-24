@@ -1,0 +1,11 @@
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.csprojAssemblyReference.cache
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.csproj.CoreCompileInputs.cache
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.AssemblyInfoInputs.cache
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.AssemblyInfo.cs
+C:\Source\ML.NET\myMLApp\bin\Debug\netcoreapp2.2\myMLApp.deps.json
+C:\Source\ML.NET\myMLApp\bin\Debug\netcoreapp2.2\myMLApp.runtimeconfig.json
+C:\Source\ML.NET\myMLApp\bin\Debug\netcoreapp2.2\myMLApp.runtimeconfig.dev.json
+C:\Source\ML.NET\myMLApp\bin\Debug\netcoreapp2.2\myMLApp.dll
+C:\Source\ML.NET\myMLApp\bin\Debug\netcoreapp2.2\myMLApp.pdb
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.dll
+C:\Source\ML.NET\myMLApp\obj\Debug\netcoreapp2.2\myMLApp.pdb
