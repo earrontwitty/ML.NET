@@ -22,7 +22,7 @@ namespace GitHubIssueClassification
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            _mlContext = new MLContext(seed:0);
         }
     }
 }
