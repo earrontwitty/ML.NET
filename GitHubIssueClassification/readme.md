@@ -56,3 +56,12 @@ Download the [issues_train.tsv](https://raw.githubusercontent.com/dotnet/samples
 
 ##### Load the data
 As the input and output of Transforms, a DataView is the fundamental data pipeline type, comparable to IEnumerable for LINQ. In ML.NET, data is similar to a SQL view. It is lazy evaluated, schematized, and heterogenous. The object is the first part of the pipeline, and loads the data. For this tutorial, it loads a dataset with issue titles descriptions, and corresponding area GitHub label. The DataView is used to create and train the model. The loading of the data seems to resemble how EF works in that you define model classes and then load the data into memory into a context using those model.
+
+##### Extract Features and transform the data
+Its important that pre-processing and cleaning of the data happen before before a dataset can be used effectively for machine learning since raw data is often noisy and unreliable, and may be missing values. Using data without these modeling tasks can produce misleading results. ML.NET's transform pipeliens compose a cutom transforms set that is applied to your data before training or testing. The transforms' pupose is data featurization. Since machinge learning alogrithms understand featurized data, the next step is to transform our data from a textual format into a numeric vector which our ML algorithms can understand. 
+
+Once the model is trained and evaluated, the values in the Label column are considered as correct values to be predicted. 
+
+Featurizing assignes different numeric keys to different values in each of the columns and is used by the ML algorithm.
+
+By default, a ML algorithm processes only features from the Features column.
