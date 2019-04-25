@@ -65,3 +65,9 @@ Once the model is trained and evaluated, the values in the Label column are cons
 Featurizing assignes different numeric keys to different values in each of the columns and is used by the ML algorithm.
 
 By default, a ML algorithm processes only features from the Features column.
+
+##### Choosing a learning algorithm
+The SdcaMultiClassTrainer is appended to the pipline and accepts the featurized Title and Description ( Features ) and the Label input parameters to learn from the historic data. You also need to map the label to the value to return to its original readable state.
+
+##### Train the model
+The model, TransformerChain<TLastTransformer>, is trained based on the dataset that has been loaded and transformed. Once the estimator has been defined, you train your model using the Fit while providing the already loaded training data. This method returns a model to use for predictions. It trains the pipeline and returns a Transformer based on the DataView passed in. The experiment is not executedc until the Fit() method runs. While the model is a transformer that operates on many rows of data, a need for predictions on individual examples is a common production scenarion.

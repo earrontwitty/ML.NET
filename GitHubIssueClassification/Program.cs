@@ -25,6 +25,16 @@ namespace GitHubIssueClassification
             _mlContext = new MLContext(seed:0);
             _trainingDataView = _mlContext.Data.LoadFromTextFile<GitHubIssue>(_trainDataPath,hasHeader: true);
             var pipline = ProcessData();
+
+            var trainingPipeline = BuildAndTrainModel(_trainingDataView, pipeline);
+            
+            GitHubIssue issue = new GitHubIssue()
+            {
+                Title = "WebSockets communication is slow in my machine",
+                Description = "The WebSockets communication used under the covers by SignalR looks like is going in my development machine.."
+            };
+            var prediction = _predEngine.Predict(issue);
+            Console.WriteLine($"=============== Single Prediction just-trained-model - Results: {prediction.Area} ===============");
         }
 
         public static IEstimator<ITransformer> ProcessData()
@@ -36,6 +46,15 @@ namespace GitHubIssueClassification
                 .AppendCacheCheckpoint(_mlContext);
 
             return pipeline;
+        }
+
+        public static IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimator<ITransformer> pipeline)
+        {
+            var trainingPipeline = pipline.Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCooredinateAscent(DefaultColumnNames.Label, DefaultColumnNames.Features))
+                .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+            _trainedModel = trainingPipeline.Fit(trainingDataView);
+            _predEngine = _trainModel.CreatePredictionEngine<GitHubIssue, IssuePrediction>(_mlContext);
+            return trainingPipeline;
         }
     }
 }
