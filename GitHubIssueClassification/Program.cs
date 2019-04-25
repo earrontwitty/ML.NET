@@ -23,6 +23,7 @@ namespace GitHubIssueClassification
         static void Main(string[] args)
         {
             _mlContext = new MLContext(seed:0);
+            _trainingDataView = _mlContext.Data.LoadFromTextFile<GitHubIssue>(_trainDataPath,hasHeader: true);
         }
     }
 }

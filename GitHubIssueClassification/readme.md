@@ -53,3 +53,6 @@ dotnet add package Microsoft.ML --version 1.0.0-preview
 
 ##### Prepare my data
 Download the [issues_train.tsv](https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_train.tsv) and the [issues_test.tsv](https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_test.tsv) data sets and save them to the Data folder previously created. The first dataset trains the machine learning model and the second can be used to evaluate how accurate your model is.
+
+##### Load the data
+As the input and output of Transforms, a DataView is the fundamental data pipeline type, comparable to IEnumerable for LINQ. In ML.NET, data is similar to a SQL view. It is lazy evaluated, schematized, and heterogenous. The object is the first part of the pipeline, and loads the data. For this tutorial, it loads a dataset with issue titles descriptions, and corresponding area GitHub label. The DataView is used to create and train the model. The loading of the data seems to resemble how EF works in that you define model classes and then load the data into memory into a context using those model.
