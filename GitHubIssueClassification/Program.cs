@@ -58,6 +58,8 @@ namespace GitHubIssueClassification
             };
             var prediction = _predEngine.Predict(issue);
             Console.WriteLine($"=============== Single Prediction just-trained-model - Results: {prediction.Area} ===============");
+            // Saves the model to a zip file
+            SaveModelAsFile(_mlContext, _trainedModel);
             // Return the model
             return trainingPipeline;
         }
@@ -78,6 +80,14 @@ namespace GitHubIssueClassification
             Console.WriteLine($"*     LogLoss:          {testMetrics.LogLoss:#.###}                *");
             Console.WriteLine($"*     LogLossReduction: {testMetrics.LogLossReduction:#.###}       *");
             Console.WriteLine($"********************************************************************");
+        }
+
+        public static void SaveModelAsFile(MLContext mlContext, ITransformer model)
+        {
+            // Saves the model as a zip file
+            using (var fs = new FileStream(_modelPath, FileMode.Create, FileAccess.Write, FileShare.Write))
+                mlContext.Model.Save(model, fs);
+            Console.WriteLine($"The model is saved to {_modelPath}");
         }
     }
 }

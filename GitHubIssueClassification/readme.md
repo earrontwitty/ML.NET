@@ -78,3 +78,6 @@ Now that the model has been created and trained, it needs to be evaluated with a
 - Macro Accuracy - Every class contributes equally to the accuracy metric. Minority classes are given equal weight as the larger classes. You want Macro Accuracy to be as close to 1 as possible.
 - Log-loss - see [Log Loss](https://docs.microsoft.com/en-us/dotnet/machine-learning/resources/glossary#log-loss) You want Log-loss to be as close to zero as possible.
 - Log-loss reduction - Ranges fro m[-inf, 100] where 100 is perfect predictions and 0 indicates mean predictions. You want Log-loss reduction to be as close to zero as possible.
+
+##### Save the model as a zip file
+At this point, the model of type TransformerChain<ILastTransformer> can be intgrated in any existing or new .NET applications.
