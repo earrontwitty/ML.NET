@@ -71,3 +71,10 @@ The SdcaMultiClassTrainer is appended to the pipline and accepts the featurized 
 
 ##### Train the model
 The model, TransformerChain<TLastTransformer>, is trained based on the dataset that has been loaded and transformed. Once the estimator has been defined, you train your model using the Fit while providing the already loaded training data. This method returns a model to use for predictions. It trains the pipeline and returns a Transformer based on the DataView passed in. The experiment is not executedc until the Fit() method runs. While the model is a transformer that operates on many rows of data, a need for predictions on individual examples is a common production scenarion.
+
+##### Evaluate the model
+Now that the model has been created and trained, it needs to be evaluated with a different dataset for quality assurance and validation In the Evaluate method, the model create in BuildAndTrainModel is passed in to be evaluated. The following metrics are evaluated for multiclass classification:
+- Micro Accuracy - Every sample-class pair contributes equally to the accuracy metric. You want MicroAccuracy to be as close to 1 as possible.
+- Macro Accuracy - Every class contributes equally to the accuracy metric. Minority classes are given equal weight as the larger classes. You want Macro Accuracy to be as close to 1 as possible.
+- Log-loss - see [Log Loss](https://docs.microsoft.com/en-us/dotnet/machine-learning/resources/glossary#log-loss) You want Log-loss to be as close to zero as possible.
+- Log-loss reduction - Ranges fro m[-inf, 100] where 100 is perfect predictions and 0 indicates mean predictions. You want Log-loss reduction to be as close to zero as possible.

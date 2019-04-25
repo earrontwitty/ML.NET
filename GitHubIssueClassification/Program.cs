@@ -28,13 +28,7 @@ namespace GitHubIssueClassification
 
             var trainingPipeline = BuildAndTrainModel(_trainingDataView, pipeline);
             
-            GitHubIssue issue = new GitHubIssue()
-            {
-                Title = "WebSockets communication is slow in my machine",
-                Description = "The WebSockets communication used under the covers by SignalR looks like is going in my development machine.."
-            };
-            var prediction = _predEngine.Predict(issue);
-            Console.WriteLine($"=============== Single Prediction just-trained-model - Results: {prediction.Area} ===============");
+            Evaluate();
         }
 
         public static IEstimator<ITransformer> ProcessData()
@@ -50,11 +44,40 @@ namespace GitHubIssueClassification
 
         public static IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimator<ITransformer> pipeline)
         {
+            // Create the training algorithm class
             var trainingPipeline = pipline.Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCooredinateAscent(DefaultColumnNames.Label, DefaultColumnNames.Features))
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+            // Train the model
             _trainedModel = trainingPipeline.Fit(trainingDataView);
             _predEngine = _trainModel.CreatePredictionEngine<GitHubIssue, IssuePrediction>(_mlContext);
+            // Predicts the area based on training data
+            GitHubIssue issue = new GitHubIssue()
+            {
+                Title = "WebSockets communication is slow in my machine",
+                Description = "The WebSockets communication used under the covers by SignalR looks like is going in my development machine.."
+            };
+            var prediction = _predEngine.Predict(issue);
+            Console.WriteLine($"=============== Single Prediction just-trained-model - Results: {prediction.Area} ===============");
+            // Return the model
             return trainingPipeline;
+        }
+
+        public static void Evaluate()
+        {
+            // Load test dataset
+            var testDataView = _mlContext.Data.LoadFromTextFile<GitHubIssue>(_testDataPath,hasHeader: true);
+            // Create the multiclass evaluator
+            // Evaluate the model and create metrics
+            var testMetrics = _mlContext.MulticlassClassification.Evaluate(_trainedModel.Transform(testDataView));
+            // Displays metrics
+            Console.WriteLine($"********************************************************************");
+            Console.WriteLine($"*     Metrics for Multi-class Classification model - Test Data     *");
+            Console.WriteLine($"*------------------------------------------------------------------*");
+            Console.WriteLine($"*     MicroAccuracy:    {testMetrics.AccuracyMicro:0.###}          *");
+            Console.WriteLine($"*     MacroAccuracy:    {testMetrics.AccuracyMacro:0.###}          *");
+            Console.WriteLine($"*     LogLoss:          {testMetrics.LogLoss:#.###}                *");
+            Console.WriteLine($"*     LogLossReduction: {testMetrics.LogLossReduction:#.###}       *");
+            Console.WriteLine($"********************************************************************");
         }
     }
 }
