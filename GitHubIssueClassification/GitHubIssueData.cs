@@ -8,7 +8,7 @@ public class GitHubIssue
     public string Area { get; set; }
     [LoadColumn(2)]
     public string Title { get; set; }
-    [LoadColumm(3)]
+    [LoadColumn(3)]
     public string Description { get; set; }
 }
 

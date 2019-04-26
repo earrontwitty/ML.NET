@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Microsoft.Data.DataView;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Transforms;
@@ -46,7 +47,7 @@ namespace GitHubIssueClassification
         public static IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimator<ITransformer> pipeline)
         {
             // Create the training algorithm class
-            var trainingPipeline = pipeline.Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCooredinateAscent(DefaultColumnNames.Label, DefaultColumnNames.Features))
+            var trainingPipeline = pipeline.Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(DefaultColumnNames.Label, DefaultColumnNames.Features))
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
             // Train the model
             _trainedModel = trainingPipeline.Fit(trainingDataView);
@@ -94,7 +95,7 @@ namespace GitHubIssueClassification
         public static void PredictIssue()
         {
             ITransformer loadedModel;
-            using (var stream = new FileStream(_modelPath, FileMdoe.Open, FileAccess.Read, FileShare.Read))
+            using (var stream = new FileStream(_modelPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 loadedModel = _mlContext.Model.Load(stream);
             }
