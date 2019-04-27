@@ -46,10 +46,10 @@ The problem can be broken into the following parts:
 Given that GitHub issues can be labeled in several areas (Area), we want to predict the Area of a new GitHub issue. This makes the classification learning algorithm is best suited for this scenario. A classification leaning algorithm that users data to determine the category, type or class of an item or row of data. Classification learning algorithms are generally used in either a binary or multiclass fashion. For this problem, we are going to use a Multiclass classification learning algorithm, since the issue category prediction can be one of many categories.
 
 ##### Create console app
-dotnet new console -n GitHubIssueClassification
-New-Item -Type Directory Data
-New-Item -Type Directory Models
-dotnet add package Microsoft.ML --version 1.0.0-preview
+dotnet new console -n GitHubIssueClassification  
+New-Item -Type Directory Data  
+New-Item -Type Directory Models  
+dotnet add package Microsoft.ML --version 1.0.0-preview  
 
 ##### Prepare my data
 Download the [issues_train.tsv](https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_train.tsv) and the [issues_test.tsv](https://raw.githubusercontent.com/dotnet/samples/master/machine-learning/tutorials/GitHubIssueClassification/Data/issues_test.tsv) data sets and save them to the Data folder previously created. The first dataset trains the machine learning model and the second can be used to evaluate how accurate your model is.
